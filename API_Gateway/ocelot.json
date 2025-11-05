@@ -1,8 +1,9 @@
 {
   "Routes": [
+    // 🔹 Product Service Routes
     {
       "UpstreamPathTemplate": "/Product",
-      "UpstreamHttpMethod": [ "GET" ],
+      "UpstreamHttpMethod": [ "GET", "POST" ],
       "DownstreamPathTemplate": "/api/product",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
@@ -13,9 +14,35 @@
       ]
     },
     {
-      "UpstreamPathTemplate": "/Orders",
-      "UpstreamHttpMethod": [ "GET" ],
-      "DownstreamPathTemplate": "/api/orders",
+      "UpstreamPathTemplate": "/Product/{id}",
+      "UpstreamHttpMethod": [ "GET", "DELETE" ],
+      "DownstreamPathTemplate": "/api/product/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7190
+        }
+      ]
+    },
+
+    // 🔹 Order Service Routes
+    {
+      "UpstreamPathTemplate": "/Order",
+      "UpstreamHttpMethod": [ "GET", "POST" ],
+      "DownstreamPathTemplate": "/api/order",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7056
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/Order/{id}",
+      "UpstreamHttpMethod": [ "GET", "DELETE" ],
+      "DownstreamPathTemplate": "/api/order/{id}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -25,6 +52,7 @@
       ]
     }
   ],
+
   "GlobalConfiguration": {
     "BaseUrl": "https://localhost:7230"
   }
