@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OrderService.Models;
+using OrderService.ProductClientService;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,7 +10,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<OrderDbContext>
 (options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-
+builder.Services.AddHttpClient<ProductService>(client =>
+{
+    client.BaseAddress = new Uri("https://localhost:7190/"); 
+});
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -103,5 +103,20 @@ namespace ProductService.Controllers
         {
             return _context.Products.Any(e => e.ProductId == id);
         }
+
+
+        [HttpPut("{id}/stock")]
+        public async Task<IActionResult> UpdateStock(int id, [FromBody] STockUpadteDTO request)
+        {
+            var product = await _context.Products.FindAsync(id);
+            if (product == null)
+                return NotFound();
+
+            product.StockQuantity = request.StockQuantity;
+            _context.Products.Update(product);
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
     }
 }
