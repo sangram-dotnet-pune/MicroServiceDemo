@@ -50,6 +50,19 @@
           "Port": 7056
         }
       ]
+    },
+
+    {
+      "UpstreamPathTemplate": "/Order/GarndTotal/{id}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamPathTemplate": "/api/order/GarndTotal/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7056
+        }
+      ]
     }
   ],
 

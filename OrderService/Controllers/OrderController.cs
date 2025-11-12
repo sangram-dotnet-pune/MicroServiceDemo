@@ -109,5 +109,27 @@ namespace OrderService.Controllers
 
             return NoContent();
         }
+
+
+        [HttpGet("/GrandTotal/{id}")]
+
+
+        public async Task<IActionResult> GetTotalAmount(int id)
+        {
+            var order = await _context.Orders
+                        .Include(o => o.OrderItems)
+                        .FirstOrDefaultAsync(o => o.OrderId == id);
+
+
+            if (order == null) return NotFound("Order Not Found");
+            decimal GrandTotal = 0;
+            foreach(var item in order.OrderItems)
+            {
+                GrandTotal += item.Subtotal;
+            }
+
+
+            return Ok(GrandTotal);
+        }
     }
 }
